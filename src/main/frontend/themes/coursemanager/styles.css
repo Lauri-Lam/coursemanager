@@ -1,0 +1,118 @@
+html {
+    --lumo-font-family: "Inter", "Segoe UI", Arial, sans-serif;
+
+    --app-color-dark: #1e1b4b;
+    --app-color-primary: #7c3aed;
+    --app-color-primary-light: #ede9fe;
+    --app-color-accent: #f97316;
+    --app-color-danger: #dc2626;
+    --app-color-success: #16a34a;
+    --app-color-bg: #f5f3ff;
+    --app-color-card: #ffffff;
+    --app-color-text: #111827;
+
+    --lumo-primary-color: var(--app-color-primary);
+    --lumo-primary-color-50pct: rgba(124, 58, 237, 0.5);
+    --lumo-primary-color-10pct: rgba(124, 58, 237, 0.1);
+
+    --lumo-error-color: var(--app-color-danger);
+    --lumo-success-color: var(--app-color-success);
+
+    --lumo-base-color: var(--app-color-bg);
+    --lumo-body-text-color: var(--app-color-text);
+    --lumo-secondary-text-color: #4b5563;
+
+    --lumo-border-radius-s: 8px;
+    --lumo-border-radius-m: 14px;
+    --lumo-border-radius-l: 22px;
+
+    --lumo-box-shadow-s: 0 3px 8px rgba(30, 27, 75, 0.16);
+    --lumo-box-shadow-m: 0 10px 24px rgba(30, 27, 75, 0.18);
+}
+
+body {
+    background: var(--app-color-bg);
+    color: var(--app-color-text);
+    font-family: var(--lumo-font-family);
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--app-color-dark);
+    margin-bottom: 16px;
+}
+
+.category-view,
+.category-detail-view,
+.course-view,
+.student-view,
+.course-search-view {
+    background: var(--app-color-bg);
+}
+
+vaadin-grid {
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: var(--lumo-box-shadow-m);
+    background: var(--app-color-card);
+}
+
+.page-title {
+    max-width: fit-content;
+    border-bottom: 4px solid var(--app-color-primary);
+    padding-bottom: 8px;
+}
+
+.filter-field {
+    min-width: 180px;
+}
+
+.search-button {
+    font-weight: 800;
+}
+
+.clear-button {
+    opacity: 0.85;
+}
+.dashboard-view {
+    background: var(--app-color-bg);
+}
+
+.dashboard-card {
+    background: white;
+    border-radius: 22px;
+    padding: 24px;
+    min-width: 220px;
+    box-shadow: 0 10px 24px rgba(30, 27, 75, 0.16);
+    border: 2px solid #ddd6fe;
+}
+
+.dashboard-card-value {
+    display: block;
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--app-color-primary);
+}
+
+.dashboard-card-title {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--app-color-dark);
+}
+
+.dashboard-card-description {
+    color: var(--lumo-secondary-text-color);
+    margin-bottom: 0;
+}
+
+.dashboard-info-panel {
+    background: white;
+    border-left: 6px solid var(--app-color-accent);
+    border-radius: 18px;
+    padding: 20px;
+    margin-top: 16px;
+    max-width: 760px;
+    box-shadow: 0 6px 16px rgba(30, 27, 75, 0.10);
+}

@@ -1,0 +1,10 @@
+[part="input-field"] {
+    background: white;
+    border: 1px solid #c4b5fd;
+    border-radius: 14px;
+}
+
+:host([focused]) [part="input-field"] {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.18);
+}

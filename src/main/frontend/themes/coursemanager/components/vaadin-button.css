@@ -1,0 +1,19 @@
+:host {
+    border-radius: 14px;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(30, 27, 75, 0.18);
+}
+
+:host([theme~="primary"]) {
+    background: #7c3aed;
+    color: white;
+}
+
+:host([theme~="error"]) {
+    background: #dc2626;
+    color: white;
+}
+
+:host([theme~="tertiary"]) {
+    color: #7c3aed;
+}

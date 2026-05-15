@@ -1,0 +1,13 @@
+[part~="header-cell"] {
+    background: #1e1b4b;
+    color: white;
+    font-weight: 800;
+}
+
+[part~="body-cell"] {
+    background: white;
+}
+
+[part~="row"]:nth-child(even) [part~="body-cell"] {
+    background: #ede9fe;
+}
