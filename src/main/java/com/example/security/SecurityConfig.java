@@ -37,6 +37,8 @@ public class SecurityConfig {
 
                         .requestMatchers("/authenticated").authenticated()
 
+                        .requestMatchers("/push").authenticated()
+
                         .requestMatchers("/user-super").hasRole("SUPER")
 
                         .requestMatchers("/admin").hasRole("ADMIN")

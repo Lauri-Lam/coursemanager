@@ -9,23 +9,31 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.H1;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.radiobutton.RadioButtonGroup;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @Route(value = "dashboard", layout = MainLayout.class)
-@PageTitle("Etusivu")
+@PageTitle("Dashboard")
 public class DashboardView extends VerticalLayout {
 
     private final CategoryRepository categoryRepository;
     private final CourseRepository courseRepository;
     private final StudentRepository studentRepository;
+
+    private final H1 title = new H1();
+    private final Paragraph intro = new Paragraph();
+
+    private final HorizontalLayout cards = new HorizontalLayout();
+    private final HorizontalLayout quickLinks = new HorizontalLayout();
+
+    private String language = "fi";
 
     public DashboardView(CategoryRepository categoryRepository,
                          CourseRepository courseRepository,
@@ -48,27 +56,68 @@ public class DashboardView extends VerticalLayout {
         setPadding(true);
         setSpacing(true);
 
-        H1 title = new H1("Etusivu");
         title.addClassName("page-title");
 
-        Paragraph intro = new Paragraph("Tämä näkymä kokoaa sovelluksen tärkeimmät tiedot yhteen paikkaan.");
+        RadioButtonGroup<String> languageSelector = new RadioButtonGroup<>();
+        languageSelector.setLabel("Kieli / Language");
+        languageSelector.setItems("Suomi", "English");
+        languageSelector.setValue("Suomi");
 
-        HorizontalLayout cards = new HorizontalLayout(
-                createStatCard("Kategoriat", categoryRepository.count(), "Kurssien pääryhmät"),
-                createStatCard("Kurssit", courseRepository.count(), "Tallennetut kurssit"),
-                createStatCard("Opiskelijat", studentRepository.count(), "Kurssien opiskelijat")
-        );
+        languageSelector.addValueChangeListener(event -> {
+            if ("English".equals(event.getValue())) {
+                language = "en";
+            } else {
+                language = "fi";
+            }
+
+            updateTexts();
+        });
+
         cards.setWidthFull();
         cards.setSpacing(true);
 
-        HorizontalLayout quickLinks = new HorizontalLayout(
-                createNavigationButton("Kategoriat", "categories"),
-                createNavigationButton("Kurssit", "courses"),
-                createNavigationButton("Kurssihaku", "courses/search")
-        );
         quickLinks.setSpacing(true);
 
-        add(title, intro, cards, quickLinks);
+        add(languageSelector, title, intro, cards, quickLinks);
+
+        updateTexts();
+    }
+
+    private void updateTexts() {
+        cards.removeAll();
+        quickLinks.removeAll();
+
+        if ("en".equals(language)) {
+            title.setText("Dashboard");
+            intro.setText("This view gathers the most important information about the application in one place.");
+
+            cards.add(
+                    createStatCard("Categories", categoryRepository.count(), "Main groups of courses"),
+                    createStatCard("Courses", courseRepository.count(), "Saved courses"),
+                    createStatCard("Students", studentRepository.count(), "Students enrolled in courses")
+            );
+
+            quickLinks.add(
+                    createNavigationButton("Categories", "categories"),
+                    createNavigationButton("Courses", "courses"),
+                    createNavigationButton("Course search", "courses/search")
+            );
+        } else {
+            title.setText("Etusivu");
+            intro.setText("Tämä näkymä kokoaa sovelluksen tärkeimmät tiedot yhteen paikkaan.");
+
+            cards.add(
+                    createStatCard("Kategoriat", categoryRepository.count(), "Kurssien pääryhmät"),
+                    createStatCard("Kurssit", courseRepository.count(), "Tallennetut kurssit"),
+                    createStatCard("Opiskelijat", studentRepository.count(), "Kurssien opiskelijat")
+            );
+
+            quickLinks.add(
+                    createNavigationButton("Kategoriat", "categories"),
+                    createNavigationButton("Kurssit", "courses"),
+                    createNavigationButton("Kurssihaku", "courses/search")
+            );
+        }
     }
 
     private Div createStatCard(String title, long value, String description) {

@@ -22,6 +22,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.RouterLink;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import com.example.ui.PushView;
 
 public class MainLayout extends AppLayout {
 
@@ -86,6 +87,7 @@ public class MainLayout extends AppLayout {
             navigation.add(createNavLink("Opiskelijat", VaadinIcon.USERS, StudentView.class));
             navigation.add(createNavLink("Kurssihaku", VaadinIcon.SEARCH, CourseSearchView.class));
             navigation.add(createNavLink("Kirjautuneen sivu", VaadinIcon.USER, AuthenticatedView.class));
+            navigation.add(createNavLink("Server Push", VaadinIcon.REFRESH, PushView.class));
         }
 
         if (hasRole("SUPER")) {
